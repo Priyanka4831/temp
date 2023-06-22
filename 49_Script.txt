@@ -1,0 +1,514 @@
+#Author: Sridevi.Nunna@osi.ca.gov
+#Date Created: 04/24/2023
+#Date Modified: 04/27/2023
+@testT49 @milestone2
+Feature: Feature to Verify that a Hotline worker or Hotline supervisor is able to capture all the person's information on Person Details page
+
+  Background: 
+    Given Application is in Login Page
+
+  @testT49-part1
+  Scenario Outline: CARESV1-T49_767-Part-1-Verify that a Hotline worker or Hotline supervisor is able to capture all the person's information on Person Details page
+    When i logged in as <User> for V1 application
+    And i wait for 15 seconds
+    Then verify i am on Home page
+    And i wait for 5 seconds
+    And i click 'Person Search' link
+    And i wait for 5 seconds
+    And i enter '-".@@%@@%%gvg' in Last Name textbox
+    And i enter '-".@rgfhhh' in First Name textbox
+    And i wait for 5 seconds
+    And i click 'Search' button
+    And i wait for 5 seconds
+    And i click 'New Person' button
+    And i wait for 5 seconds
+    And i select 'Male' value in Sex at Birth dropdown
+    And i enter '-".@@%@@%%gvg' in Last Name textbox
+    And i enter '-".@rgfhhh' in First Name textbox
+    And i wait for 5 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    And i verify ' Only hypens(-), apostrophe('), accent marks, period(.) allowed.' text is present on page
+    And i click 'Cancel' button
+    And i wait for 3 seconds
+    And i click 'Search' button
+    And i click 'New Person' button
+    And i wait for 5 seconds
+    And i enter 'randomText' in Last Name textbox
+    And i enter 'randomText' in First Name textbox
+    And i wait for 2 seconds
+    Then i verify Sex at Birth dropdown values are Male, Female, Intersex, Unknown/Missing
+    Then i verify Has Potential Tribal Affiliation dropdown values are Continue to Inquire, Reason to Believe (Further inquiry is required), Reason to Know
+    And i wait for 2 seconds
+    And i enter 'OneDayBefore18Yrs' in Birthdate textbox
+    And i click 'Save' button
+    And i wait for 5 seconds
+    And i verify 'Birthdate cannot be a future date' text is present on page
+    And i wait for 5 seconds
+    Then i verify 'Pregnant' text is present on page
+    Then i verify 'Parenting Teen' text is present on page
+    And i enter 'test,t@test.com' in Email textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    Then i verify 'You have entered an invalid format.' text is present on page
+    And i select 'Male' value in Sex at Birth dropdown
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    And i enter 'test@test.com' in Email textbox
+    And i wait for 2 seconds
+    And i enter '18' in Approximate Age textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    Then i verify 'Approximate Age can only be entered if Birthdate is unknown' text is displayed on page
+    And i click 'Cancel' button
+    And i wait for 3 seconds
+    And i navigate to Person Search page
+    And i wait for 5 seconds
+    When i create new person from person search tab
+      | sexAtBirth |
+      | Male       |
+    And i wait for 3 seconds
+    And i click 'Save' button
+    And i wait for 10 seconds
+    Then i verify 'Name' text is present on page
+    Then i verify 'Has Potential Tribal Affiliation' text is present on page
+    Then i verify 'Organization' text is present on page
+    Then i verify 'Pregnant' text is present on page
+    Then i verify 'Birthdate' text is present on page
+    Then i verify 'Parenting Teen' text is present on page
+    Then i verify 'Approximate Age' text is present on page
+    Then i verify 'Date/Time of Reclaim Requested' text is present on page
+    Then i verify 'Social Security Number Mask' text is present on page
+    Then i verify 'Email' text is present on page
+    Then i verify 'Edit' button is present on page
+    Then i verify 'View/Edit Masked Fields' button is present on page
+    And i click 'View/Edit Masked Fields' button
+    And i wait for 5 seconds
+    #And i enter '123456780' in Social Security Number textbox
+    #And i wait for 3 seconds
+    #And i click 'Save' button
+    And i wait for 3 seconds
+
+    Examples: 
+      | User               |
+      | 'StaffContraCosta' |
+
+  #|  'SupervisorContraCosta'   |
+  @testT49-part2
+  Scenario Outline: CARESV1-T49_767-Part-2-Verify that a Hotline worker or Hotline supervisor is able to capture all the person's information on Person Details page
+    When i logged in as <User> for V1 application
+    And i wait for 15 seconds
+    Then verify i am on Home page
+    And i wait for 5 seconds
+   And i navigate to Persons page
+    And i wait for 5 seconds
+    And i click 'Person Search' link
+    And i wait for 5 seconds
+    And i enter 'randomText' in Last Name textbox
+    And i enter 'randomText' in First Name textbox
+    And i wait for 5 seconds
+    And i click 'Search' button
+    And i wait for 5 seconds
+    And i click 'New Person' button
+    
+    And i wait for 5 seconds
+    And i scroll to Down by 100 pixels
+    Then i verify 'Gender Identity' dropdown is present on page
+    Then i verify Gender Identity dropdown values are Female, Male, Non-Binary, Gender Queer, Transgender Female, Transgender Male, Two-Spirit, Gender Fluid, Decline to State, Did Not Ask, Not Listed, Unsure
+    Then i verify 'Preferred Pronouns' dropdown is present on page
+    Then i verify Preferred Pronouns dropdown values are He/Him, She/Her, They/Them
+    Then i verify 'Sexual Orientation' dropdown is present on page
+    Then i verify Sexual Orientation dropdown values are Asexual, Bisexual, Gay, Lesbian, Pansexual, Straight or Heterosexual, Queer, Declines to State, Not Listed, Unable to Determine
+    Then i verify 'Sexual Orientation Unable To Determine' dropdown is present on page
+    Then i verify 'Sexual Orientation Not Listed' textarea is present on page
+    Then i verify 'Gender Identity Description' textarea is present on page
+    And i select 'Intersex' value in Sex at Birth dropdown
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 3 seconds
+    #Then i verify 'Federal reporting requires an answer of ‘male' or ‘female', please select the most appropriate choice for this client' text is present on page
+    And i select 'Male' value in Sex Type dropdown
+    And i select 'Not Listed' value in Sexual Orientation dropdown
+    And i wait for 2 seconds
+    And i select 'Not Listed' value in Gender Identity dropdown
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    #Then i verify 'Sexual Orientation Not Listed is required when Sexual Orientation is selected as “Not Listed”.' text is present on page
+    #Then i verify 'Gender Identity Description is required when Gender is selected as “Two-Spirit” or “Not Listed”.' text is present on page
+    And i wait for 2 seconds
+    And i enter 'randomText' in Gender Identity Description textarea
+    And i wait for 2 seconds
+    And i enter 'randomText' in Sexual Orientation Not Listed textarea
+    And i wait for 2 seconds
+    And i select 'Unable to Determine' value in Sexual Orientation dropdown
+    And i wait for 2 seconds
+    And i select 'Client does not know' value in Sexual Orientation Unable To Determine dropdown
+    And i wait for 2 seconds
+    And i select 'Transgender Female' value in Gender Identity dropdown
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    #Then i verify 'Sexual Orientation Not Listed is required only when “Not Listed” is selected. Please remove text if this option was not selected.' text is present on page
+    #Then i verify 'Gender Identity Description is required only when “Two-Spirit” or “Not Listed” is selected. Please remove text if neither of these options were selected.' text is present on page
+
+    Examples: 
+      | User                    |
+      | 'StaffContraCosta'      |
+      #| 'SupervisorContraCosta' |
+
+  @testT49-part3
+  Scenario Outline: CARESV1-T49_767-Part-3-Race/Ethnicity & Languages-Verify that a Hotline worker or Hotline supervisor is able to capture all the person's information on Person Details page
+    When i logged in as <User> for V1 application
+    And i wait for 15 seconds
+    Then verify i am on Home page
+    And i wait for 5 seconds
+    And i navigate to Persons page
+    And i wait for 5 seconds
+    And i click 'Person Search' link
+    And i wait for 5 seconds
+    And i enter 'randomText' in Last Name textbox
+    And i enter 'randomText' in First Name textbox
+    And i wait for 5 seconds
+    And i click 'Search' button
+    And i wait for 5 seconds
+    And i click 'New Person' button
+    And i wait for 2 seconds
+    And i select 'Male' value in Sex at Birth dropdown
+    Then i verify 'Preferred Spoken Language' dropdown is present on page
+    Then i verify 'Hispanic or Latino' dropdown is present on page
+    Then i verify 'Other Hispanic/Latino Description' textbox is present on page
+    Then i verify 'Other Race Description' textbox is present on page
+    Then i verify Hispanic or Latino dropdown values are Yes, No, Unknown/Unable to Determine, Abandoned, Declined
+    #And i set page to New Person
+    #And i move Arabic values from Secondary Spoken Language available list to chosen list
+    And i wait for 2 seconds
+    And i select 'Yes' value in Hispanic or Latino dropdown
+    And i wait for 2 seconds
+    #And i move Mexican values from Hispanic or Latino Detail available list to chosen list
+    #And i wait for 2 seconds
+    And i enter 'randomText' in Other Hispanic/Latino Description textbox
+    And i wait for 5 seconds
+    #And i move Asian values from Race available list to chosen list
+    #And i wait for 2 seconds
+    #And i move Black values from Race available list to chosen list
+    #And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    #Then i verify error messages in we hit a snag popup on new person page
+      #| Race Details | Other Hispanic/Latino Description |
+    And i wait for 5 seconds
+    And i enter 'randomText' in Other Race Description textbox
+    And i wait for 5 seconds
+    And i scroll to down by 300 pixels
+    #And i set page to New Person
+    #And i move Asian - Cambodian values from Race Details available list to chosen list
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    #Then i verify 'Invalid combination for Race and Race detail selected. Please select a valid combination.' text is present on page
+
+    Examples: 
+      | User                    |
+      | 'StaffContraCosta'      |
+      #| 'SupervisorContraCosta' |
+
+  @testT49-part4
+  Scenario Outline: CARESV1-T49_767-Part-4-Person Relationship-Verify that a Hotline worker or Hotline supervisor is able to capture all the person's information on Person Details page
+    When i logged in as <User> for V1 application
+    And i wait for 15 seconds
+    Then verify i am on Home page
+    And i wait for 5 seconds
+    And i navigate to Person Search page
+    And i wait for 5 seconds
+    When i create new person from person search tab
+      | sexAtBirth |
+      | Male       |
+    And i wait for 3 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    Then i store person name value as 'Person1' in temporary variable
+    And i wait for 5 seconds
+    And i navigate to Person Search page
+    And i wait for 5 seconds
+    When i create new person from person search tab
+      | sexAtBirth |
+      | Male       |
+    And i wait for 3 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    And i capture current url of record type validated person
+    And i click 'Person Relationships' relatedlistheaderlink
+    And i wait for 3 seconds
+    And i click 'New' button
+    And i wait for 5 seconds
+    Then i verify 'Related Person' searchbox is present on page
+    Then i verify 'Relationship Type' dropdown is present on page
+    Then i verify 'End Date' textbox is present on page
+    Then i verify 'End Reason' textbox is present on page
+    Then i verify 'Related Person Help Info' button is present on page
+    Then i verify 'Person Help Info' button is present on page
+    And i click 'Save' button
+    And i wait for 3 seconds
+    Then i verify error messages in we hit a snag popup on view person page
+      | Related Person | Relationship Type |
+    And i wait for 2 seconds
+    And i enter and select 'Person1' value in Related Person searchbox
+    And i wait for 2 seconds
+    And i select 'aunt maternal' value in Relationship Type dropdown
+    And i wait for 2 seconds
+    And i select 'nephew' value in Reciprocal Relationship Type dropdown
+    And i wait for 2 seconds
+    And i enter 'randomText' in End Reason textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    Then i verify 'End Reason cannot be entered unless an End Date has been indicated.' text is present on page
+    And i wait for 2 seconds
+    And i enter future date in 'MM/dd/YYYY' format for 2 days from today in Start Date textbox
+    And i wait for 2 seconds
+    And i enter future date in 'MM/dd/YYYY' format for -2 days from today in End Date textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    Then i verify 'Date cannot be in the future' text is present on page
+    Then i verify 'End Date cannot be prior to Start Date' text is present on page
+    And i wait for 2 seconds
+    And i enter 'TodayDate' in Start Date textbox
+    And i wait for 2 seconds
+    And i enter 'TodayDate' in End Date textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    Then i verify column names of Person Relationships section on Person Relationships page
+      | Relationship Id | Related Person | Relationship Type | Reciprocal Relationship Type | Start Date | End Date | End Reason |
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click first Relationship Id from related person relationships table of Person Relationships page
+    And i wait for 3 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    Then i verify 'Relationship Id' text is present on page
+    Then i verify 'Related Person' text is present on page
+    Then i verify 'Person' text is present on page
+    Then i verify 'Reciprocal Relationship Type' text is present on page
+    Then i verify 'Relationship Type' text is present on page
+    Then i verify 'End Date' text is present on page
+    Then i verify 'Start Date' text is present on page
+    Then i verify 'End Reason' text is present on page
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+
+    Examples: 
+      | User                    |
+      | 'StaffContraCosta'      |
+      #| 'SupervisorContraCosta' |
+
+  @testT49-part5
+  Scenario Outline: CARESV1-T49_767-Part-5-Person Phones-Verify that a Hotline worker or Hotline supervisor is able to capture all the person's information on Person Details page
+    When i logged in as <User> for V1 application
+    And i wait for 15 seconds
+    Then verify i am on Home page
+    And i wait for 5 seconds
+    And i navigate to Person Search page
+    And i wait for 5 seconds
+    When i create new person from person search tab
+      | sexAtBirth |
+      | Male       |
+    And i wait for 3 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    And i capture current url of record type validated person
+    And i click 'Person Phones' relatedlistheaderlink
+    And i wait for 3 seconds
+    And i click 'New' button
+    And i wait for 5 seconds
+    Then i verify 'Phone Type' dropdown is present on page
+    Then i verify Phone Type dropdown values are mobile, home, work, temporary
+    Then i verify 'Phone Number' textbox is present on page
+    Then i verify 'Country Code' dropdown is present on page
+    Then i verify 'Save' button is present on page
+    Then i verify 'Cancel' button is present on page
+    Then i verify 'Save & New' button is present on page
+    And i click 'Save' button
+    And i wait for 3 seconds
+    Then i verify error messages in we hit a snag popup on view person page
+      | Phone Type | Phone Number |
+    And i wait for 2 seconds
+    And i select 'mobile' value in Phone Type dropdown
+    And i wait for 2 seconds
+    And i enter '<()%' in Phone Number textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    Then i verify 'Enter numerical values only.' text is present on page
+    And i wait for 2 seconds
+    And i enter '99908654' in Phone Number textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    Then i verify 'You must enter 10 numbers for a USA phone number.' text is present on page
+    And i wait for 2 seconds
+    And i enter '9987654321' in Phone Number textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    #Then i verify column names of Person Phones section on View Person page
+      #| Person Phone Id | Phone Type | Country Code | Phone Number |
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click first Person Phone Id from related person phones table of view person page
+    And i wait for 3 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    Then i verify 'Person Phone Id' text is present on page
+    Then i verify 'Phone Type' text is present on page
+    Then i verify 'Person' text is present on page
+    Then i verify 'Phone Number' text is present on page
+    Then i verify 'Country Code' text is present on page
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+
+    Examples: 
+      | User                    |
+      | 'StaffContraCosta'      |
+      #| 'SupervisorContraCosta' |
+
+  @testT49-part6
+  Scenario Outline: CARESV1-T49_767-Part-6-AKA-Verify that a Hotline worker or Hotline supervisor is able to capture all the person's information on Person Details page
+    When i logged in as <User> for V1 application
+    And i wait for 15 seconds
+    Then verify i am on Home page
+    And i wait for 5 seconds
+    And i navigate to Person Search page
+    And i wait for 5 seconds
+    When i create new person from person search tab
+      | sexAtBirth |
+      | Male       |
+    And i wait for 3 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    And i capture current url of record type validated person
+    And i click 'AKA' relatedlistheaderlink
+    And i wait for 3 seconds
+    And i click 'New' button
+    And i wait for 5 seconds
+    Then i verify 'AKA Middle Name' textbox is present on page
+    Then i verify 'AKA First name' textbox is present on page
+    Then i verify 'AKA Last Name' textbox is present on page
+    Then i verify 'Save' button is present on page
+    Then i verify 'Cancel' button is present on page
+    Then i verify 'Save & New' button is present on page
+    And i click 'Save' button
+    And i wait for 3 seconds
+    Then i verify error messages in we hit a snag popup on view person page
+      | AKA Last Name | AKA First name |
+    And i wait for 2 seconds
+    And i enter '<()%' in AKA Middle Name textbox
+    And i wait for 2 seconds
+    And i enter '<()%' in AKA First name textbox
+    And i wait for 2 seconds
+    And i enter '<()%' in AKA Last Name textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    Then i verify error messages in we hit a snag popup on view person page
+      | AKA Last Name | AKA First name | AKA Middle Name |
+    Then i verify 'Only hypens(-), apostrophe('), accent marks, period(.) allowed' text is present on page
+    And i wait for 2 seconds
+    And i enter 'Test-Test' in AKA Middle Name textbox
+    And i wait for 2 seconds
+    And i enter 'New-Test' in AKA First name textbox
+    And i wait for 2 seconds
+    And i enter 'randomText' in AKA Last Name textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    #Then i verify column names of AKA section on View Person page
+      #| AKA Id | AKA First name | AKA Middle Name | AKA Last Name |
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click first AKA Id from related aka table of view person page
+    And i wait for 3 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    Then i verify 'AKA Id' text is present on page
+    Then i verify 'AKA Middle Name' text is present on page
+    Then i verify 'Person' text is present on page
+    Then i verify 'AKA Last Name' text is present on page
+    Then i verify 'AKA First name' text is present on page
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+
+    Examples: 
+      | User                    |
+      | 'StaffContraCosta'      |
+      #| 'SupervisorContraCosta' |
+
+  @testT49-part7
+  Scenario Outline: CARESV1-T49_767-Part-7-AKA-Verify that a Hotline worker or Hotline supervisor is able to capture all the person's information on Person Details page
+    When i logged in as <User> for V1 application
+    And i wait for 15 seconds
+    Then verify i am on Home page
+    And i wait for 5 seconds
+    And i navigate to Person Search page
+    And i wait for 5 seconds
+    When i create new person from person search tab
+      | sexAtBirth |
+      | Male       |
+    And i wait for 3 seconds
+    And i click 'Save' button
+    And i wait for 10 seconds
+    And i click 'Tribal Information' relatedlistheaderlink
+    And i wait for 3 seconds
+    And i click 'New' button
+    And i wait for 5 seconds
+    Then i verify 'Tribe Name' searchbox is present on page
+    Then i verify 'Enrollment Number' textbox is present on page
+    Then i verify 'Verified' text is present on page
+    Then i verify 'Affiliation End Date' textbox is present on page
+    Then i verify 'Affiliation Start Date' textbox is present on page
+    Then i verify 'Save' button is present on page
+    Then i verify 'Cancel' button is present on page
+    Then i verify 'Save & New' button is present on page
+    And i click 'Save' button
+    And i wait for 3 seconds
+    Then i verify error messages in we hit a snag popup on view person page
+      | Tribe Name |
+    And i wait for 2 seconds
+    And i enter and select 'Cherokee Nation' value in Tribe Name searchbox
+    And i wait for 2 seconds
+    And i enter future date in 'MM/dd/YYYY' format for 2 days from today in Affiliation Start Date textbox
+    And i wait for 2 seconds
+    And i enter 'TodayDate' in Affiliation End Date textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 2 seconds
+    Then i verify 'Affiliation Start Date cannot be a date in the future' text is displayed on page
+    Then i verify 'Affiliation End Date cannot be before Affiliation Start Date' text is displayed on page
+    And i wait for 2 seconds
+    And i enter 'TodayDate' in Affiliation Start Date textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click first Person Tribe Id from related Tribal Information table of view person page
+    And i wait for 5 seconds
+    Then i verify 'Person Tribe Id' text is present on page
+    Then i verify 'Tribe Name' text is present on page
+    Then i verify 'Person' text is present on page
+    Then i verify 'Verified' text is present on page
+    Then i verify 'Enrollment Number' text is present on page
+    Then i verify 'Affiliation End Date' text is present on page
+    Then i verify 'Affiliation Start Date' text is present on page
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+
+    Examples: 
+      | User                    |
+      | 'StaffContraCosta'      |
+      #| 'SupervisorContraCosta' |
