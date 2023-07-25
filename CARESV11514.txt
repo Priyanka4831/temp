@@ -1,0 +1,569 @@
+#Author: Priyanka.Pandey@osi.ca.gov
+#Date Created: 07/19/2023
+#Date Modified: 07/19/2023
+############## PART 1 and 2 to be executed Together ###########################
+#################### Use Folio Record with Hearing and Administrative Hearing for SIT  : 00003053  and for QA : 00002581   #############################
+@testT1514 @adm-idm
+Feature: Feature to Verify Non-Owner Horizontal Sharing rules Privileges for “Justice System Interaction", "Hearing" and "Administrative Hearing"
+  object.
+
+  Background: Given Application is in Login Page
+
+  @testT1514-part1
+  Scenario Outline: CARESV1-T1514_1468-Part-1-Verify Non-Owner Horizontal Sharing rules Privileges for “Justice System Interaction", "Hearing" and "Administrative Hearing"
+    object.
+
+    ############ Hotline Worker County2 ##############################
+    When i logged in as 'StaffContraCostaUserTwo' for V1 application
+    And i wait for 10 seconds
+    Then verify i am on Home page
+    And i wait for 5 seconds
+    And i navigate to Person Search page
+    And i wait for 5 seconds
+    When i create new person from person search tab
+      | sexAtBirth |
+      | Male       |
+    And i wait for 3 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    And i capture validated person url from view person page
+    #######################  Create Justice System Interaction  ############################
+    And i click 'Background' subtab
+    And i wait for 2 seconds
+    Then i verify 'Background Checks' text is present on page
+    Then i verify 'Restraining Order Information' text is present on page
+    Then i verify 'Justice System Interaction' text is present on page
+    And i create new justice system interaction
+      | type          | institution |
+      | Incarceration | randomText  |
+    And i wait for 3 seconds
+    And i click 'Save' button
+    And i wait for 8 seconds
+    And i click 'Justice System Interaction' relatedlistheaderlink
+    And i wait for 3 seconds
+    And i refresh the page
+    And i wait for 8 seconds
+    And i capture record number 1 of Justice System Interaction ID column from related Justice System Interaction table of Justice System Interaction page
+    And i click saved record of Justice System Interaction ID column from Justice System Interaction page
+    And i wait for 5 seconds
+    And i click 'Edit Type' button
+    And i wait for 5 seconds
+    And i click on Log Out
+    And i wait for 5 seconds
+    ##########################  Hotline Worker/Supervisor County 1  #####################################
+    When i logged in as <HotlineUser> for V1 application
+    And i wait for 10 seconds
+    Then i navigate to current person using url
+    And i wait for 10 seconds
+    And i click 'Background' subtab
+    And i wait for 5 seconds
+    Then i verify 'Background Checks' text is present on page
+    Then i verify 'Restraining Order Information' text is present on page
+    Then i verify 'Justice System Interaction' text is present on page
+    And i wait for 5 seconds
+    And i click 'Justice System Interaction' relatedlistheaderlink
+    And i wait for 3 seconds
+    And i refresh the page
+    And i wait for 8 seconds
+    And i capture record number 1 of Justice System Interaction ID column from related Justice System Interaction table of Justice System Interaction page
+    And i click saved record of Justice System Interaction ID column from Justice System Interaction page
+    And i wait for 5 seconds
+    And i wait for 5 seconds
+    And i click 'Edit Type' button
+    And i wait for 5 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    And i verify 'Oops...you don't have the necessary privileges to edit this record. See your administrator for help.' text is present on page
+
+    Examples: 
+      | HotlineUser             |
+      | 'StaffContraCosta'      |
+      | 'SupervisorContraCosta' |
+
+  @testT1514-part2
+  Scenario Outline: CARESV1-T1514_1468-Part_2-Verify Non-Owner Horizontal Sharing rules Privileges for “Justice System Interaction", "Hearing" and "Administrative Hearing"
+    object.
+
+    ############ Hotline Worker County2 ##############################
+    When i logged in as 'StaffContraCostaUserTwo' for V1 application
+    And i wait for 10 seconds
+    And verify i am on Home page
+    And i wait for 5 seconds
+    And i navigate to Screenings page
+    And i wait for 5 seconds
+    And i click 'New' button
+    And i wait for 5 seconds
+    #####Initial Screening Information  ############
+    And i enter 'TodayDate' in Date textbox
+    And i select 'Abuse/Neglect Referral' value in Reason for the Call dropdown
+    And i enter 'randomText' in Screening Name textbox
+    And i enter 'randomText' in Call Narrative for Div Paragraph Textbox in V1
+    And i select 'Non-Mandated Reporter' radiobutton
+    And i select 'No' value in Does This Screening Require a Call Back? dropdown
+    And i click 'Save and Proceed' button
+    And i wait for 5 seconds
+    And i set page to view screening
+    And i wait for 5 seconds
+    And i capture SCR ID from view screening page
+    And i capture screening url from view screening page
+    #############  Add Person(s)  #################
+    And i enter person 1 deatils with role as 'Alleged Perpetrator' in Screening
+    And i scroll to Down by 200 pixels
+    And i wait for 5 seconds
+    And i click '+ Add Row' button
+    And i wait for 5 seconds
+    And i scroll to Down by 200 pixels
+    And i enter person 2 deatils with role as 'Alleged Victim' in Screening
+    And i click 'Save and Proceed' button
+    And i wait for 5 seconds
+    ################  Add Addresss(es)  #################
+    And i refresh the page
+    And i wait for 5 seconds
+    And i scroll on page to Address Type dropdown
+    And i wait for 5 seconds
+    And i select 'Location of Incident' value in Address Type dropdown
+    And i enter 'randomText' in Address Line 1 textbox
+    And i enter 'Oakland' in City textbox
+    And i enter '94763' in Zip Code textbox
+    And i click 'Search' button
+    And i wait for 5 seconds
+    And i click 'Validate Address' button
+    And i wait for 5 seconds
+    And i scroll to Down by 200 pixels
+    And i wait for 8 seconds
+    And i select radiobutton
+    And i wait for 5 seconds
+    And i click 'Save and Proceed' button
+    And i wait for 5 seconds
+    And i scroll to Up by 600 pixels
+    And i set page to view screening
+    #########  Add Allegation(s) #################
+    And i select stored 'Alleged Victim' value from constant file in Select Alleged Victim dropdown
+    And i select stored 'Alleged Perpetrator' value from constant file in Select Alleged Perpetrator dropdown
+    And i select 'Caretaker Absence/Incapacity' value in Allegation Type dropdown
+    And i wait for 2 seconds
+    And i move Abandonment,Parent Deceased, values from Allegations Subtype available list to chosen list
+    And i click 'Save and Proceed' button
+    And i wait for 5 seconds
+    ##########  Identify Safety Alert(s)  #################
+    And i click 'Save and Proceed' button
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 10 seconds
+    #######  SDM Hotline Tool  #################
+    And i scroll to down by 200 pixels
+    And i wait for 5 seconds
+    And i select 'Immediate' value in Response Type dropdown
+    And i wait for 2 seconds
+    And i click 'Save and Proceed' button
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    ##########  Tribal Inquiry & Collaboration  #################
+    And i click 'Tribal Inquiry & Collaboration' link
+    And i wait for 5 seconds
+    And i scroll to Down by 200 pixels
+    And i enter 'TodayDate' in Date textbox
+    And i enter '12:00 AM' in Time textbox
+    And i select 'Reporting Party' value in Participant Type dropdown
+    And i scroll to Down by 200 pixels
+    And i enter and select 'Alleged Victim' value in On Behalf of Child searchbox
+    And i select 'In-Person' value in Method dropdown
+    And i select 'Tribal Inquiry' value in Contact Purpose dropdown
+    And i select 'Completed' value in Contact Status dropdown
+    And i enter and select 'Hotline Staff ContraCosta Two' value from property file in Staff Person searchbox
+    And i wait for 5 seconds
+    And i select 'Continue to Inquire' value in Initial ICWA Inquiry dropdown
+    And i wait for 5 seconds
+    And i select 'Home' value in Location dropdown
+    And i click 'Save and Proceed' button
+    And i wait for 5 seconds
+    ########  +ERR Doc  #################
+    And i generate ERR document
+    ###############  Supervisor Review/Promotion  #################
+    And i scroll to down by 200 pixels
+    And i wait for 2 seconds
+    And i set page to view screening
+    And i wait for 5 seconds
+    And i enter and select 'Hotline Supervisor ContraCosta Two' value from property file in Approval Supervisor searchbox
+    And i click 'Save and Proceed' button
+    And i verify 'Record(s) saved successfully' toast message
+    And i wait for 5 seconds
+    #####################  Validate screening person - 1  #################
+    And i scroll to down by 300 pixels
+    And i click on 'Screening Persons' Partial link
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i capture record number 1 of Screening Person column from related Screening Persons table of Screening Persons page
+    And i click saved record of Screening Person column from Screening Persons page
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click 'Validate Person' button
+    And i wait for 5 seconds
+    And i click 'Search' button
+    And i wait for 5 seconds
+    And i click 'New Person' button
+    And i wait for 5 seconds
+    And i select 'Male' value in Sex at Birth dropdown
+    And i click 'Save' button
+    And i wait for 3 seconds
+    And i verify 'Screening Person record has been attached' toast message
+    #####################  Validate screening person - 2 ##################
+    And i wait for 5 seconds
+    Then i navigate to current screening using url
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i scroll to down by 400 pixels
+    And i click on 'Screening Persons' Partial link
+    And i wait for 5 seconds
+    And i capture record number 2 of Screening Person column from related Screening Persons table of Screening Persons page
+    And i click saved record of Screening Person column from Screening Persons page
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click 'Validate Person' button
+    And i wait for 5 seconds
+    And i click 'Search' button
+    And i wait for 5 seconds
+    And i click 'New Person' button
+    And i wait for 5 seconds
+    And i select 'Male' value in Sex at Birth dropdown
+    And i click 'Save' button
+    And i wait for 3 seconds
+    And i verify 'Screening Person record has been attached' toast message
+    Then i navigate to current screening using url
+    And i wait for 5 seconds
+    ####  Submit For Approval  #################
+    And i click 'Submit For Approval' button
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i enter 'Submitting for approval' in Comments textarea
+    And i wait for 2 seconds
+    And i click 'Submit' button
+    And i wait for 5 seconds
+    And i verify 'Screening has been submitted for approval.' text is present on page
+    And i click 'Close' button
+    And i wait for 5 seconds
+    And i click on Log Out
+    And i wait for 5 seconds
+    ####### Approval  #################
+    When i logged in as 'SupervisorContraCostaUserTwo' for V1 application
+    And i wait for 5 seconds
+    Then i click on the notification for SCR ID to approve
+    And i wait for 5 seconds
+    And i verify 'Approve' text is present on page
+    Then i Approve the approval request
+    And i set page to view approval
+    And i refresh the page
+    And i wait for 5 seconds
+    And i verify 'Approved' text is present on page
+    And i verify 'Approved' text for Status element
+    And i click on Log Out
+    And i wait for 5 seconds
+    ######  Assignment  #################
+    When i logged in as 'StaffContraCostaUserTwo' for V1 application
+    And i wait for 5 seconds
+    And i navigate to Screenings page
+    And i wait for 5 seconds
+    And i select Approved Screenings list view on screenings page
+    And i wait for 5 seconds
+    And i search SCR ID in list view
+    And i wait for 5 seconds
+    And i click first record of Approved Screenings list view of screenings tab
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 7 seconds
+    And i enter and select 'erworker contracosta two' value from property file in Primary Worker searchbox
+    And i wait for 5 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i set page to view screening
+    And i wait for 3 seconds
+    And i capture Folio ref from view screening page
+    And i capture Folio ref url from view screening page
+    And i wait for 5 seconds
+    And i click on Log Out
+    ########  Logging in as ER Worker County 2  #################
+    Given Application is in Login Page
+    When i logged in as 'ERWorkerContraCostaUserTwo' for V1 application
+    And i wait for 5 seconds
+    Then i navigate to current folio using url
+    And i wait for 5 seconds
+    And i set page to view folio
+    And i refresh the page
+    And i wait for 7 seconds
+    And i click 'Approval/Audit' subtab
+    And i wait for 5 seconds
+    And i scroll to down by 200 pixels
+    And i click 'Edit' button
+    And i enter and select 'ersupervisor contracosta two' value from property file in Approval Supervisor searchbox
+    And i click 'Save' button
+    And i wait for 5 seconds
+    Then i navigate to current folio using url
+    And i wait for 5 seconds
+    And i set page to view folio
+    And i refresh the page
+    And i wait for 7 seconds
+    ###################### Update Allegation  #############################
+    And i click on 'Allegations' Partial link
+    And i wait for 2 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click first Allegation ID from related Allegations table of Allegations page
+    And i wait for 5 seconds
+    Then i verify 'Allegation Conclusion' dropdown is present on page
+    Then i verify 'Allegation Conclusion Rationale' textbox is present on page
+    And i scroll to down by 200 pixels
+    And i wait for 2 seconds
+    And i select 'Unfounded' value in Allegation Conclusion dropdown
+    And i enter 'randomText' in Allegation Conclusion Rationale textbox
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    Then i navigate to current folio using url
+    And i wait for 5 seconds
+    And i set page to view folio
+    ###################### Update Disposition  #############################
+    And i click on 'Disposition' Partial link
+    And i wait for 2 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click first Disposition ID from related Disposition table of Disposition page
+    And i set page to view disposition
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click 'Edit Closure Date' button
+    And i wait for 5 seconds
+    And i enter future date in 'MM/dd/YYYY' format for -2 days from today in Closure Date textbox
+    And i wait for 2 seconds
+    And i select 'Do Not Promote to Case' value in Disposition dropdown
+    And i enter 'randomText' in Rationale textarea
+    And i select 'Situation Stabilized' value in Disposition Closure Reason Type dropdown
+    And i wait for 2 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    Then i navigate to current folio using url
+    And i wait for 5 seconds
+    And i set page to view folio
+    And i wait for 5 seconds
+    ###################  + Contact - Contact  ##########################################
+    And i refresh the page
+    And i wait for 5 seconds
+    Then i navigate to current folio using url
+    And i wait for 5 seconds
+    And i set page to view folio
+    And i click '+ Contact' button
+    And i wait for 7 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i select 'Structured Investigation Contact' radiobutton
+    And i wait for 5 seconds
+    And i click 'Next' button
+    And i wait for 5 seconds
+    And i enter 'TodayDate' in Date textbox
+    And i wait for 5 seconds
+    And i enter '12:00 AM' in Time textbox
+    And i wait for 3 seconds
+    And i select 0 position from On Behalf of Child inputdropdown New
+    And i select 'Home' value in Location dropdown
+    And i wait for 5 seconds
+    And i select 'In-Person' value in Method dropdown
+    And i wait for 5 seconds
+    And i select 'Completed' value in Contact Status dropdown
+    And i wait for 5 seconds
+    And i select 0 position from Participant inputdropdown New
+    And i wait for 5 seconds
+    And i select 0 position from Participant inputdropdown New
+    And i wait for 5 seconds
+    And i enter LargeRandomText in 'Investigation Introduction' textarea with length '10'
+    And i wait for 5 seconds
+    And i enter LargeRandomText in 'Indian Ancestry' textarea with length '10'
+    And i wait for 5 seconds
+    And i select 'Yes' value in Is the physical home environment safe? dropdown
+    And i select 'In Draft' value in Documentation Status dropdown
+    And i verify 'Save' button is present on page
+    And i wait for 3 seconds
+    And i click 'Save' button
+    And i wait for 7 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i set page to view folio
+    ###### CACI Report ############################
+    And i wait for 5 seconds
+    And i click 'Show more actions' button
+    And i wait for 5 seconds
+    And i click 'CACI Report' link
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click 'Perpetrator' button
+    And i wait for 5 seconds
+    And i enter 'FOP' in Perpetrator textbox
+    And i select folio person for CACI perpetrator
+    And i wait for 5 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 7 seconds
+    And i set page to view folio
+    And i click 'Correspondence' subtab
+    And i wait for 35 seconds
+    And i scroll to Down by 200 pixels
+    And i wait for 10 seconds
+    And i scroll to Down by 200 pixels
+    And i wait for 5 seconds
+    And i click 'CACI Report' partial link
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i set page to new administrative hearing
+    And i capture CACI ID from new administrative hearing page
+    And i wait for 5 seconds
+    Then i navigate to current folio using url
+    And i wait for 5 seconds
+    And i set page to view folio
+    ###################### Submit for approval  #############################
+    And i click 'Show more actions' button
+    And i click 'Submit for Approval' link
+    And i wait for 5 seconds
+    And i click 'Yes' button
+    And i wait for 5 seconds
+    And i click 'Submit' button
+    And i wait for 5 seconds
+    And i click 'Finish' button
+    And i wait for 5 seconds
+    And i click on Log Out
+    And i wait for 5 seconds
+   
+    ############  Approving the Folio record  ####################
+    When i logged in as 'ERSupervisorContraCostaUserTwo' for V1 application
+    And i wait for 5 seconds
+    Then i navigate to current folio using url
+    And i wait for 5 seconds
+    And i set page to view folio
+    And i click 'Approval/Audit' subtab
+    And i wait for 10 seconds
+    And i scroll to down by 200 pixels
+    And i wait for 5 seconds
+    And i click 'Edit' button
+    And i wait for 5 seconds
+    And i enter 'TodayDate' in Investigation Closed Date textbox
+    And i click 'Save' button
+    And i wait for 5 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click on 'Approval History' Partial link
+    And i wait for 5 seconds
+    Then i verify 'Approve' button is present on page
+    And i wait for 5 seconds
+    And i click 'Approve' button
+    And i wait for 5 seconds
+    And i enter 'Approved' in Comments textarea
+    And i click Approve button 2
+    And i wait for 5 seconds
+    Then i verify 'Approved' text is present on page
+    And i wait for 5 seconds
+    And i click on Log Out
+    And i wait for 5 seconds
+    #######  Logging in after Folio is approved ############
+    Given Application is in Login Page
+    When i logged in as 'ERWorkerContraCostaUserTwo' for V1 application
+    And i wait for 5 seconds
+    Then i navigate to current folio using url
+    And i wait for 5 seconds
+    And i set page to view folio
+    And i refresh the page
+    And i wait for 5 seconds
+    ######### Creating Administrative hearing record when folio is in approved status############
+    And i click on 'Administrative Hearing' Partial link
+    And i wait for 10 seconds
+    And i refresh the page
+    And i wait for 5 seconds
+    And i click 'New' button
+    And i set page to new administrative hearing
+    And i wait for 5 seconds
+    And i enter 'TodayDate' in SOC 834 Response Received Date textbox
+    And i enter 'randomText' in Notes textarea
+    And i enter 'randomText' in Hearing Officer textbox
+    And i select 'Affirmed' value in Grievance Outcome dropdown
+    And i wait for 5 seconds
+    And i set page to new administrative hearing
+    And i enter CACI ID from constant file in Correspondence ID textbox
+    And i click 'show All Results For Correspondence Id' element
+    And i wait for 5 seconds
+    And i click Correspondence ID link
+    And i wait for 7 seconds
+    And i click 'Save' button
+    And i refresh the page
+    And i wait for 5 seconds
+   
+    ##### Creation of Hearing record ############
+    And i refresh the page
+    And i wait for 8 seconds
+    And i set page to new administrative hearing
+    And i wait for 5 seconds
+    And i capture record number 1 of Admin Hearing ID column from related Administrative Hearing table of new administrative hearing page
+    And i click saved record of Admin Hearing ID column from new administrative hearing page
+    And i wait for 5 seconds
+    And i click 'New' button
+    And i wait for 5 seconds
+    And i enter 'TodayDate' in Hearing Date textbox
+    And i enter '12:00 AM' in Hearing Time textbox
+    And i select 'Continued' value in Hearing Type dropdown
+    And i enter 'randomText' in Parties Present textarea
+    And i wait for 5 seconds
+    And i click 'Save' button
+		And i wait for 5 seconds
+    And i click on Log Out
+    And i wait for 5 seconds
+
+ #######  Logging in as ERWorker/Supervisor County 1 ############
+    When i logged in as 'ERWorkerContraCostaUserTwo' for V1 application
+    And i wait for 5 seconds
+    Then i navigate to current folio using url
+    And i wait for 5 seconds
+    And i set page to view folio
+    
+ ############# Editing Administrative hearing ############
+    And i refresh the page
+    And i wait for 8 seconds
+    And i set page to new administrative hearing
+    And i capture record number 1 of Admin Hearing ID column from related Administrative Hearing table of new administrative hearing page
+    And i click saved record of Admin Hearing ID column from new administrative hearing page
+    And i wait for 5 seconds
+    And i scroll to down by 200 pixels
+    And i click 'Edit Notes' button
+    And i enter 'randomText' in Hearing Officer textbox
+    And i enter 'randomText' in Notes textarea
+    And i select 'Overturned' value in Grievance Outcome dropdown
+    And i wait for 3 seconds
+    And i scroll to down by 50 pixels
+    And i wait for 5 seconds
+    And i enter 'TodayDate' in DOJ Notification Date textbox
+    And i enter 'TodayDate' in Perpetrator Notification Date textbox
+    And i enter 'randomText' in Overturned Allegations textarea
+    And i select 'Email' value in Perpetrator Notification Method dropdown
+    And i wait for 5 seconds
+    And i click 'Save' button
+    And i verify '' text is present on page
+    And i wait for 5 seconds
+    ################ Editing of Hearing record ####################
+    And i click 'hearing id' element
+    And i wait for 5 seconds
+    And i click 'Edit Hearing Type' button
+    And i wait for 5 seconds
+    And i enter future date in 'MM/dd/YYYY' format for -2 days from today in Hearing Date textbox
+    And i enter '11:00 AM' in Hearing Time textbox
+    And i select 'Initial' value in Hearing Type dropdown
+    And i enter 'randomText' in Parties Present textarea
+    And i wait for 5 seconds
+    And i click 'Save' button
+    And i wait for 5 seconds
+    Examples: 
+      | ERUser                  | PrimaryWorker            |
+      | ERWorkerContraCosta     | erworker contracosta     |
+      | ERSupervisorContraCosta | ersupervisor contracosta |
