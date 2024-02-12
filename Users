@@ -1,11 +1,128 @@
-AutoTitleIV469_Contracosta_V1SIT@osi.ca.gov / Cares@4013475636
-AutoTitleIV_Fresno_V1SIT@osi.ca.gov / Cares@4013475636
+appUrl= https://login.4.cares.cwds.ca.gov 
+salesforceUrl= https://cacwds--v1sit.sandbox.lightning.force.com/
 
-ERWorkerContraCostaUserTwo 
-contracostaERworker2Email_v1 = autoerworker155_Contacosta_V1SIT@osi.ca.gov
-contracostaERworker2Password_v1 = Cares@4013475636789
-contracostaERworkerUser2 = AutoER155 Contracosta
+contracostaStaffEmail_v1 = Auto_Hstaff1_ContraCosta_V1_SIT@nomail.ca.gov
+contracostaStaffPassword_v1 = Cares@401347563793
+contracostaStaffUser = Hotline Staff1 Contra Costa
 
 contracostaSupervisorEmail_V1 = Auto_Hsupervisor1_ContraCosta_V1_SIT@nomail.ca.gov
-contracostaSupervisorPassword_V1 = Cares@401347563793
+contracostaSupervisorPassword_V1 = Cares@40134756379321
 contracostaStaffSupervisorUser = Auto_Hotline Supervisor1 Contra Costa
+
+erWorkerContraCostaEmail =  auto_erworker3_contracosta_v1sit@osi.ca.gov
+erWorkerContraCostaPassword = Cares@40134756375
+erWorkerContraCosta = erworker3 auto
+
+erSupervisorContraCostaEmail = auto_supervisor3_contracosta_v1sit@osi.ca.gov  
+erSupervisorContraCostaPassword = Cares@401347563723
+erSupervisorContraCostaUser = Erwupervisor3 Auto
+
+fresnoStaffEmail = Auto_Hstaff2_Fresno_V1_SIT@nomail.ca.gov
+fresnoStaffPassword = Cares@40134756361
+fresnoStaffUser = Hotline Staff2 Fresno
+
+fresnoSupervisorEmail = Auto_HSupervisor2_Fresno_V1_SIT@nomail.ca.gov
+fresnoSupervisorPassword = Cares@40134756361
+fresnoSupervisorUser = Hotline Supervisor2 Fresno
+
+erWorkerFresnoEmail = autoer_worker_fresno_V1sit@osi.ca.gov
+erWorkerFresnoPassword = Cares!40134756362
+erWorkerFresnoUser = AutoER worker
+
+erSupervisorFresnoEmail = autoer_supervisor_fresno_V1sit@osi.ca.gov 
+erSupervisorFresnoPassword = Cares@401347563672
+erSupervisorFresnoUser = AutoER supervisor
+
+TriggertableEmail_V1 = Auto_Trigger_User@osi.ca.gov
+TriggertablePWD_V1 = Cares@4013475632
+
+placerTitleIVEmail_v1 = Auto_TitleIV_Staff_Placer@osi.ca.gov
+placerTitleIVPassword_v1 = Cares@40134756361
+
+placerCDSSStaffEmail_v1 = Auto_CDSS_Staff_Placer@osi.ca.gov
+placerCDSSStaffPassword_v1 = Cares@401347563692
+
+stateReadOnlyUserEmail = auto_ro_state@osi.ca.gov
+stateReadOnlyUserPassword = Cares@401347563672
+
+RiversideStaffEmail_v1 = auto_hstaff4_riverside_v1_sit@nomail.ca.gov
+RiversideStaffPassword_v1 = Cares@401347563672
+
+reversideSupervisorEmail_V1 = Auto_Hsupervisor4_Riverside_V1_SIT@nomail.ca.gov
+hotlineRiversideSupervisorPassword = Cares@401347563672
+
+contracostaStaff2Email_v1 = autohotline155_worker_contracosta_v1SIT@osi.ca.gov
+contracostaStaff2Password_v1 = Cares@4013475636789
+contracostaStaffUser2 = Autohotline155 autoworker155
+
+contracostaSupervisor2Email_V1 =  Autohotline155_supervisor_contracosta_V1SIT@osi.ca.gov
+contracostaSupervisor2Password_V1 = Cares@4013475636790
+contracostaStaffSupervisor2User = Autohotline155 Autosupervisor155
+
+contracostaERworker2Email_v1 = autoerworker155_Contacosta_V1SIT@osi.ca.gov
+contracostaERworker2Password_v1 = Cares@4013475636790
+contracostaERworkerUser2 = AutoER155 Contracosta
+
+contracostaERSupervisor2Email_V1 =  Autoer155_Supervisor_Contracosta@osi.ca.gov
+contracostaERSupervisor2Password_V1 = Cares@4013475636789
+contracostaERSupervisor2User = AutoER155 Supervisor155
+
+cmWorkerContraCostaEmail =  AutoCMworker4201_Contracosta_V1SIT@osi.ca.gov
+cmWorkerContraCostaPassword = Cares@401347563690
+cmWorkerContraCostaUser = Autocase4201 worker 4201
+
+cmSupervisorContraCostaEmail =  AutoCMSupervisor4201_Contracosta_V1SIT@osi.ca.gov
+cmSupervisorContraCostaPassword = Cares@4013475638
+cmSupervisorContraCostaUser = Autocase 4201 Supervisor4201
+
+cmManagerContraCostaEmail =  AutoCMManager4201_Contracosta_V1SIT@osi.ca.gov
+cmManagerContraCostaPassword = Cares@401347563689
+cmManagerContraCostaUser = Autocase4201 manager4201
+
+cmWorkerFresnoEmail =  Autocmworker4200_Fresno_V1SIT@osi.ca.gov
+cmWorkerFresnoPassword = Cares@4013475636789
+cmWorkerFresnoUser = Auto case4200 worker4200
+                     
+cmSupervisorFresnoEmail =  AutoCMSupervisor4200_Fresno_V1SIT@osi.ca.gov
+cmSupervisorFresnoPassword = Cares@401347563678
+cmSupervisorFresnoUser = Autocase 4200 Supervisor
+
+cmManagerFresnoEmail =  AutoCMmanager4200_Fresno_V1SIT@Osi.ca.gov
+cmManagerFresnoPassword = Cares@40134756367
+cmManagerFresnoUser = Autocase4200 manager
+
+cmWorkerPlacerEmail =  AutoCMworker4202_Placer_V1SIT@osi.ca.gov
+cmWorkerPlacerPassword = Cares@4013475636789
+cmWorkerPlacerUser = Autocase4202 worker4202
+                     
+cmSupervisorPlacerEmail =  AutoCMsupervisor4202_Placer_V1SIT@osi.ca.gov
+cmSupervisorPlacerPassword = Cares@401347563678
+cmSupervisorPlacerUser = Autocase4202 Supervisor4202
+
+cmManagerPlacerEmail =  AutoCMmanager4202_Placer_V1SIT@osi.ca.gov
+cmManagerPlacerPassword = Cares@40134756367
+cmManagerPlacerUser = Autocase4202 Manager4202
+
+fresnoStaff2Email = Autohw4102_Fresno_V1SIT@osi.ca.gov
+fresnoStaff2Password = Cares@40134756378
+fresnoStaff2User = Autohotline4102 worker
+
+fresnoSupervisor2Email = AutoHSupervisor4102_Fresno_V1SIT@osi.ca.gov
+fresnoSupervisor2Password = Cares@40134756367
+fresnoSupervisor2User = AutoHotline4102 Supervisor
+
+contracostaSupervisor3Email_V1 =  AutohSupervisor4100_Contracosta_V1SIT@osi.ca.gov
+contracostaSupervisor3Password_V1 = Cares@401347563678
+contracostaStaffSupervisor3User = Autohotline Supervisor4100
+
+autoOrgAdministratorEmail_V1 =  Autoorg_Administrator_V1SIT@osi.ca.gov
+autoOrgAdministratorPassword_V1 = Cares@40134756368
+autoOrgAdministrator3User = Auto Orgadministrator
+
+autoOfficeAdministratorEmail_V1 =  autooffice409_Administrator_V1SIT@osi.ca.gov
+autoOfficeAdministratorPassword_V1 = Cares@401347563679
+autoOfficeAdministratorUser = Auto Officeadministrator
+
+autoStateAdministratorEmail_V1 =  autostateadministrator_v1sit@nomail.osi.ca.gov 
+autoStateAdministratorPassword_V1 = Cares@40134756368
+autoStateAdministratorUser = Auto Stateadministrator
