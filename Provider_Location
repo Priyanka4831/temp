@@ -1,0 +1,56 @@
+/**
+	 * @author meghashashidhara
+	 * This method creates Provider Location - new Provider location Record is created and saved
+	 * |placementCategory | placementType |
+	 * |Independent Living  | Supervised Independent Living Placement|
+	 * @throws Exception
+	 */
+	
+	@And("i create new Provider Location record of Placement type")
+	public void i_create_new_Provider_Location(DataTable args) throws Exception {
+
+        List<List<String>> data = args.asLists(); 
+		Map<String, String> dataMap = SalesforceConstants.setInfoToPropertyMap("", data.get(0), data.get(1));
+
+		logger.info("----user entering new Provider Location Record----");
+		String providerLocationName = Commons.getRandomAlphabet(10);
+		commonSteps.refresh_page();
+		commonSteps.clickOnPartialLink("Provider Locations");
+		commonSteps.click_element("New","button");
+		commonSteps.enter_text(providerLocationName,"Organization Name","textbox");
+		commonSteps.select_value_in_dropdown("Placement","Location Category");
+		commonSteps.selectValueFromInputDropDownIndex(dataMap.get("placementCategory"), "Placement Category");
+		commonSteps.selectValueFromInputDropDownIndex(dataMap.get("placementType"), "Placement Type");
+	    commonSteps.click_element("Next", "button");
+	    commonSteps.click_element("Next", "button");
+	    commonSteps.click_element("Next", "button");
+	    commonSteps.click_element("Next", "button");
+	    commonSteps.click_element("Complete", "button");
+	    commonSteps.wait_for("1");
+	    logger.info("Provider Location Record is created");
+	    Commons.hardWaitInSecond(2);   
+		SalesforceConstants.setConstantValue("PROVIDER LOCATION NAME",providerLocationName);
+		Commons.hardWaitInSecond(2);
+	}
+	
+	/**
+	 * @author meghashashidhara
+	 * This method adds a new Provider Organization and saves it
+	 * @throws Exception
+	 */
+	@And("i create new Provider Organization record")
+	public void i_create_new_Provider_Organization() throws Exception{
+		
+		logger.info("----user entering new Provider Organization Record----");
+		commonSteps.refresh_page();
+		commonSteps.click_element("Organizations", "link");
+		commonSteps.click_element("New", "button");
+		commonSteps.select_radiobutton_checkbox("Provider Organization", "radiobutton");
+		commonSteps.click_element("Next", "button");
+		commonSteps.enter_text("randomText","Organization Name","textbox");
+		commonSteps.click_element("Save", "button");
+		commonSteps.wait_for("1");
+	    logger.info("Provider Organization Record is created");
+		Commons.hardWaitInSecond(2);
+	}
+	
