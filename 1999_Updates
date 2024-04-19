@@ -1,0 +1,586 @@
+  @Test_1999_part1
+  Scenario Outline: CARESV1-T1999_P1_Behavioral Health - Validate Create/Update for Person Profile as CMM, CMS and CMW
+    When i logged in as <CMUser> for V1 application
+    And verify i am on Home page
+    And i refresh the page
+    ###################### Create New Non-Investigative Case #################
+    And i click 'Open New Case' link
+    And i switch to last tab
+    And i create new Non-Investigative Case with case type as Child Welfare Voluntary
+    And i set page to view folio
+    And i capture Folio ref url from view folio page
+    ##################  Create New Person  ############################
+    And i click on 'Persons' Partial link
+    And i add new person as male
+    Then i navigate to current folio using url
+    And i click on 'Persons' Partial link
+    And i set page to view person
+    And i capture record number 1 of Validated Person Name column from related Persons table of Persons page
+    And i click saved record of Validated Person Name column from Persons page
+    And i refresh the page
+    And i set page to view person
+    And i click 'validatedPerson' element
+    And i capture current url of record type validated person
+    ##################  BehavioralEmotionalSocialHealth ###########################
+    And i click 'Health' subtab
+    Then i verify 'Behavioral/Emotional/Social Health' text is present on page
+    Then i verify 'Physical Health' text is present on page
+    And i click 'New Behavioral/Emotional/Social Health' button
+    ################# Validate New Health Information screen######################
+    Then i verify 'Alcohol Dependency Treatment' checkbox is present on page
+    Then i verify 'Alcohol or Substance Abuse Challenges' checkbox is present on page
+    Then i verify 'Behavioral and Emotional Health Needs' checkbox is present on page
+    Then i verify 'Behavioral Health' checkbox is present on page
+    Then i verify 'Behavioral Health Services' checkbox is present on page
+    Then i verify 'Legal Issues' checkbox is present on page
+    Then i verify 'Psychiatric Hospitalization' checkbox is present on page
+    Then i verify 'School Disciplinary Issues' checkbox is present on page
+    Then i verify 'Substance Dependency Treatment' checkbox is present on page
+    #################  Behavioral Health checkbox ###########################
+    And i check 'Behavioral Health' checkbox
+    And i click Next
+    Then i verify 'Behavioral Health Type' dropdown is present on page
+    Then i verify 'Date of Diagnosis' textbox is present on page
+    Then i verify 'Provider Name' textbox is present on page
+    Then i verify 'Provider Phone' textbox is present on page
+    Then i verify 'Source Name' textbox is present on page
+    Then i verify 'Source Relationship to Focus Child' textbox is present on page
+    Then i verify 'Date Source Observed Concern' textbox is present on page
+    Then i verify 'Date Reported to Worker' textbox is present on page
+    Then i verify 'Additional Information' textarea is present on page
+    And i select 'Alcohol Dependence' value in Behavioral Health Type dropdown
+    And i enter 'Julia Purple' in Source Name textbox
+    And i enter 'Care Giver' in Source Relationship to Focus Child textbox
+    And i enter 'PastFullDate' in Date Reported to Worker textbox
+    And i enter 'PastFullDate' in Date Source Observed Concern textbox
+    And i click Next
+    And i click Complete
+    Then i navigate to current person using url
+    And i set page to view person
+    ################  Behavioral Health record  ###########################
+    And i click 'Health' subtab
+    And i click on 'Behavioral/Emotional/Social Health' linkText
+    And i refresh the page
+    And i click first record of Health Information ID column from person page
+    And i refresh the page
+    Then i verify Behavioral Health Type record data is 'Alcohol Dependence'
+    Then i verify Source Relationship to Focus Child record data is 'Care Giver'
+    And i scroll to Down by 150 pixels
+    Then i verify Source Name record data is 'Julia Purple'
+    Then i verify 'Date of Diagnosis' textContains is present on page
+    Then i verify 'Date Reported to Worker' textContains is present on page
+    Then i verify 'Date Source Observed Concern' textContains is present on page
+    Then i verify 'Additional Information' textContains is present on page
+    And i scroll to Down by 150 pixels
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+    ############### Edit Behavioral Health Information #####################
+    And i click 'Edit Behavioral Health Type' button
+    And i select 'Anxiety' value in Behavioral Health Type dropdown
+    And i click Save
+    Then i verify Behavioral Health Type record data is 'Anxiety'
+    And i click on Log Out
+		 Examples: 
+      | CMUser                    |
+      | 'CMWorkerContraCosta'     |
+      | 'CMSupervisorContraCosta' |
+
+  @Test1999_part2
+  Scenario Outline: CARESV1-T1999_P2_LegalIssues-Verify that Case Management: Validate Create/Update for Person Profile as CMM, CMS and CMW
+    When i logged in as <CMUser> for V1 application
+    And verify i am on Home page
+    ###################### Create New Non-Investigative Case #################
+    And i click 'Open New Case' link
+    And i switch to last tab
+    And i create new Non-Investigative Case with case type as Child Welfare Voluntary
+    And i set page to view folio
+    And i capture Folio ref url from view folio page
+    #################  Create New Person  ############################
+    And i click on 'Persons' Partial link
+    And i add new person as male
+    Then i navigate to current folio using url
+    And i click on 'Persons' Partial link
+    And i set page to view person
+    And i capture record number 1 of Validated Person Name column from related Persons table of Persons page
+    And i click saved record of Validated Person Name column from Persons page
+    And i refresh the page
+    And i set page to view person
+    And i click 'validatedPerson' element
+    And i capture current url of record type validated person
+    ###############  Legal Issues checkbox ###########################
+    And i click 'Health' subtab
+    And i click 'New Behavioral/Emotional/Social Health' button
+    And i check 'Legal Issues' checkbox
+    And i click Next
+    Then i verify 'Legal Issues Type' dropdown is present on page
+    Then i verify 'Date of Occurrence' textbox is present on page
+    Then i verify 'Source Relationship to Focus Child' textbox is present on page
+    Then i verify 'Date Reported' textbox is present on page
+    Then i verify 'Source Name' textbox is present on page
+    Then i verify 'Date Source Observed Concern' textbox is present on page
+    Then i verify 'Additional Information' textarea is present on page
+    Then i verify Legal Issues Type dropdown values are Arrest, Charges, Incarceration, Probation or Parole, Ticket, Other outcomes
+    And i enter 'Julia Robert' in Source Name textbox
+    And i select 'Arrest' value in Legal Issues Type dropdown
+    And i enter 'randomText' in Source Relationship to Focus Child textbox
+    And i enter 'PastFullDate' in Date Reported textbox
+    And i enter 'PastFullDate' in Date Source Observed Concern textbox
+    And i click Next
+    And i click Complete
+    And i set page to view person
+    And i capture current url of record type validated person
+    ################  Legal Issues record ###########################
+    And i click 'Health' subtab
+    And i click 'Behavioral/Emotional/Social Health' relatedlistheaderlink
+    And i refresh the page
+    Then i verify 'Health Information ID' text is present on page
+    Then i verify 'Health Type' text is present on page
+    Then i verify 'Source Name' text is present on page
+    Then i verify 'Date Source Observed Concern' text is present on page
+    Then i verify 'Source Relationship to Focus Child' text is present on page
+   	And i refresh the page
+    And i click first record of Health Information ID column from person page
+    Then i verify Legal Issues Type record data is 'Arrest'
+    Then i verify 'Date of Occurrence' textContains is present on page
+    Then i verify 'Source Relationship to Focus Child' textContains is present on page
+    Then i verify 'Date Reported' textContains is present on page
+    Then i verify 'Source Name' textContains is present on page
+    Then i verify 'Date Source Observed Concern' textContains is present on page
+    Then i verify 'Additional Information' textContains is present on page
+    And i scroll to Down by 150 pixels
+    And i scroll to Down by 150 pixels
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+    ############### Edit Legal Issues #####################
+    And i click 'Edit Legal Issues Type' button
+    And i scroll to Down by 150 pixels
+    And i enter 'randomText' in Additional Information textarea
+    And i click Save
+
+    Examples: 
+      | CMUser                    |
+      | 'CMWorkerContraCosta'     |
+      | 'CMSupervisorContraCosta' |
+
+
+  @Test1999_part3
+  Scenario Outline: CARESV1-T1999_P3 School Disciplinary Issues - Verify that Case Management: Validate Create/Update for Person Profile as CMM, CMS and CMW
+    When i logged in as <CMUser> for V1 application
+    And verify i am on Home page
+    ###################### Create New Non-Investigative Case #################
+    And i click 'Open New Case' link
+    And i switch to last tab
+    And i create new Non-Investigative Case with case type as Child Welfare Voluntary
+    And i set page to view folio
+    And i capture Folio ref url from view folio page
+    ##################  Create New Person  ############################
+    And i click on 'Persons' Partial link
+    And i add new person as female
+    Then i navigate to current folio using url
+    And i click on 'Persons' Partial link
+    And i set page to view person
+    And i capture record number 1 of Validated Person Name column from related Persons table of Persons page
+    And i click saved record of Validated Person Name column from Persons page
+    And i refresh the page
+    And i set page to view person
+    And i click 'validatedPerson' element
+    And i capture current url of record type validated person
+    ################# School Disciplinary Issues checkbox ###########################
+    And i click 'Health' subtab
+    And i click 'New Behavioral/Emotional/Social Health' button
+    And i check 'School Disciplinary Issues' checkbox
+    And i click Next
+    Then i verify 'Disciplinary Action' dropdown is present on page
+    Then i verify 'Date of Occurrence' textbox is present on page
+    Then i verify 'Source Relationship to Focus Child' textbox is present on page
+    Then i verify 'Date Reported' textbox is present on page
+    Then i verify 'Source Name' textbox is present on page
+    Then i verify 'Date Source Observed Concern' textbox is present on page
+    Then i verify 'Additional Information' textarea is present on page
+    Then i verify Disciplinary Action dropdown values are Detention, Expulsion, In School Suspension, Out of School Suspension, Other
+    And i enter 'randomText' in Source Name textbox
+    And i select 'Detention' value in Disciplinary Action dropdown
+    And i enter 'randomText' in Source Relationship to Focus Child textbox
+    And i enter 'PastFullDate' in Date Reported textbox
+    And i enter 'PastFullDate' in Date Source Observed Concern textbox
+    And i click Next
+    And i click Complete
+    And i refresh the page
+    ################# School Disciplinary Issues record ###########################
+    And i click 'Health' subtab
+    And i click 'Behavioral/Emotional/Social Health' relatedlistheaderlink
+    And i refresh the page
+    And i click first Health Information ID from related BehavioralEmotionalSocialHealth table of view Person page
+    And i refresh the page
+    Then i verify 'Disciplinary Action' textContains is present on page
+    Then i verify 'Date of Occurrence' textContains is present on page
+    Then i verify 'Source Relationship to Focus Child' textContains is present on page
+    Then i verify 'Date Reported' textContains is present on page
+    Then i verify 'Source Name' textContains is present on page
+    Then i verify 'Date Source Observed Concern' textContains is present on page
+    Then i verify 'Additional Information' textContains is present on page
+    And i scroll to Down by 250 pixels
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+    And i click on Log Out
+
+    Examples: 
+      | CMUser                    |
+      | 'CMWorkerContraCosta'     |
+      | 'CMSupervisorContraCosta' |
+
+
+  @Test1999_part4
+  Scenario Outline: CARESV1-T1999_P4_Psychiatric Hospitalization_Verify that Case Management: Validate Create/Update for Person Profile as CMM, CMS and CMW
+    When i logged in as <CMUser> for V1 application
+    And verify i am on Home page
+    ###################### Create New Non-Investigative Case #################
+    And i click 'Open New Case' link
+    And i switch to last tab
+    And i create new Non-Investigative Case with case type as Child Welfare Voluntary
+    And i set page to view folio
+    And i capture Folio ref url from view folio page
+    ###################  Create New Person  ############################
+    And i click on 'Persons' Partial link
+    And i add new person as female
+    Then i navigate to current folio using url
+    And i click on 'Persons' Partial link
+    And i set page to view person
+    And i capture record number 1 of Validated Person Name column from related Persons table of Persons page
+    And i click saved record of Validated Person Name column from Persons page
+    And i refresh the page
+    And i set page to view person
+    And i click 'validatedPerson' element
+    And i capture current url of record type validated person
+    ################### Psychiatric Hospitalization checkbox ###########################
+    And i click 'Health' subtab
+    And i click 'New Behavioral/Emotional/Social Health' button
+    And i check 'Psychiatric Hospitalization' checkbox
+    And i click Next
+    Then i verify 'Start Date of Services' textbox is present on page
+    Then i verify 'Source Relationship to Focus Child' textbox is present on page
+    Then i verify 'Date Reported' textbox is present on page
+    Then i verify 'Source Name' textbox is present on page
+    Then i verify 'Date Reporter Observed Concern' textbox is present on page
+    Then i verify 'End Date of Services' textbox is present on page
+    Then i verify 'Provider Name' textbox is present on page
+    Then i verify 'Reason for Admission' textbox is present on page
+    Then i verify 'Services Provided' textbox is present on page
+    Then i verify 'Outcomes' textbox is present on page
+    Then i verify 'Treatment Goals' textbox is present on page
+    And i enter 'randomText' in Source Name textbox
+    And i enter 'randomText' in Source Relationship to Focus Child textbox
+    And i enter 'PastFullDate' in Date Reported textbox
+    And i enter 'PastFullDate' in Date Reporter Observed Concern textbox
+    And i click Next
+    And i click Complete
+    And i refresh the page
+    Then i navigate to current person using url
+    And i set page to view person
+    ################### Psychiatric Hospitalization record ###########################
+    And i click 'Health' subtab
+    And i click 'Behavioral/Emotional/Social Health' relatedlistheaderlink
+    And i refresh the page
+    And i click first Health Information ID from related BehavioralEmotionalSocialHealth table of view Person page
+    And i refresh the page
+    Then i verify 'Start Date of Services' textContains is present on page
+    Then i verify 'Source Relationship to Focus Child' textContains is present on page
+    Then i verify 'Date Reported' textContains is present on page
+    Then i verify 'Source Name' textContains is present on page
+    Then i verify 'Date Reporter Observed Concern' textContains is present on page
+    Then i verify 'End Date of Services' textContains is present on page
+    Then i verify 'Provider Name' textContains is present on page
+    Then i verify 'Reason for Admission' textContains is present on page
+    Then i verify 'Services Provided' textContains is present on page
+    Then i verify 'Outcomes' textContains is present on page
+    Then i verify 'Treatment Goals' textContains is present on page
+    And i scroll to Down by 350 pixels
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+    And i click on Log Out
+
+    Examples: 
+      | CMUser                    |
+      | 'CMWorkerContraCosta'     |
+      | 'CMSupervisorContraCosta' |
+
+
+  @Test1999_part5
+  Scenario Outline: CARESV1-T1999_P5_Alcohol Dependency Treatment_Verify that Case Management: Validate Create/Update for Person Profile as CMM, CMS and CMW
+    When i logged in as <CMUser> for V1 application
+    And verify i am on Home page
+    ###################### Create New Non-Investigative Case #################
+    And i click 'Open New Case' link
+    And i switch to last tab
+    And i create new Non-Investigative Case with case type as Child Welfare Voluntary
+    And i set page to view folio
+    And i capture Folio ref url from view folio page
+    ###################  Create New Person  ############################
+    And i click on 'Persons' Partial link
+    And i add new person as female
+    Then i navigate to current folio using url
+    And i click on 'Persons' Partial link
+    And i set page to view person
+    And i capture record number 1 of Validated Person Name column from related Persons table of Persons page
+    And i click saved record of Validated Person Name column from Persons page
+    And i refresh the page
+    And i set page to view person
+    And i click 'validatedPerson' element
+    And i capture current url of record type validated person
+    #################### Alcohol Dependency Treatment checkbox ###########################
+    And i click 'Health' subtab
+    And i click 'New Behavioral/Emotional/Social Health' button
+    And i check 'Alcohol Dependency Treatment' checkbox
+    And i click Next
+    Then i verify 'Start Date of Services' textbox is present on page
+    Then i verify 'Source Relationship to Focus Child' textbox is present on page
+    Then i verify 'Date Reported' textbox is present on page
+    Then i verify 'Source Name' textbox is present on page
+    Then i verify 'Date Reporter Observed Concern' textbox is present on page
+    Then i verify 'End Date of Services' textbox is present on page
+    Then i verify 'Provider Name' textbox is present on page
+    Then i verify 'Reason for Admission' textbox is present on page
+    Then i verify 'Services Provided' textbox is present on page
+    Then i verify 'Outcomes' textbox is present on page
+    Then i verify 'Treatment Goals' textbox is present on page
+    And i enter 'randomText' in Source Name textbox
+    And i enter 'randomText' in Source Relationship to Focus Child textbox
+    And i enter 'PastFullDate' in Date Reported textbox
+    And i enter 'PastFullDate' in Date Reporter Observed Concern textbox
+    And i click Next
+    And i click Complete
+    And i refresh the page
+    Then i navigate to current person using url
+    And i set page to view person
+    ################## Alcohol Dependency Treatment record ###########################
+    And i click 'Health' subtab
+    And i click 'Behavioral/Emotional/Social Health' relatedlistheaderlink
+    And i refresh the page
+    And i click first Health Information ID from related BehavioralEmotionalSocialHealth table of view Person page
+    And i refresh the page
+    Then i verify 'Start Date of Services' textContains is present on page
+    Then i verify 'Source Relationship to Focus Child' textContains is present on page
+    Then i verify 'Date Reported' textContains is present on page
+    Then i verify 'Source Name' textContains is present on page
+    Then i verify 'Date Reporter Observed Concern' textContains is present on page
+    Then i verify 'End Date of Services' textContains is present on page
+    Then i verify 'Provider Name' textContains is present on page
+    Then i verify 'Reason for Admission' textContains is present on page
+    Then i verify 'Services Provided' textContains is present on page
+    Then i verify 'Outcomes' textContains is present on page
+    Then i verify 'Treatment Goals' textContains is present on page
+    And i scroll to Down by 350 pixels
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+    And i click on Log Out
+
+    Examples: 
+      | CMUser                    |
+      | 'CMWorkerContraCosta'     |
+      | 'CMSupervisorContraCosta' |
+
+
+  @Test1999_part6
+  Scenario Outline: CARESV1-T1999_P6_Substance Dependency Treatment-Verify that Case Management: Validate Create/Update for Person Profile as CMM, CMS and CMW
+    When i logged in as <CMUser> for V1 application
+    And verify i am on Home page
+    ###################### Create New Non-Investigative Case #################
+    And i click 'Open New Case' link
+    And i switch to last tab
+    And i create new Non-Investigative Case with case type as Child Welfare Voluntary
+    And i set page to view folio
+    And i capture Folio ref url from view folio page
+    ###################  Create New Person  ############################
+    And i click on 'Persons' Partial link
+    And i add new person as female
+    Then i navigate to current folio using url
+   	And i click on 'Persons' Partial link
+    And i set page to view person
+    And i capture record number 1 of Validated Person Name column from related Persons table of Persons page
+    And i click saved record of Validated Person Name column from Persons page
+    And i refresh the page
+    And i set page to view person
+    And i click 'validatedPerson' element
+    And i capture current url of record type validated person
+    ################### Substance Dependency Treatment checkbox ###########################
+    And i click 'Health' subtab
+    And i click 'New Behavioral/Emotional/Social Health' button
+    And i check 'Substance Dependency Treatment' checkbox
+    And i click Next
+    Then i verify 'Start Date of Services' textbox is present on page
+    Then i verify 'Source Relationship to Focus Child' textbox is present on page
+    Then i verify 'Date Reported' textbox is present on page
+    Then i verify 'Source Name' textbox is present on page
+    Then i verify 'Date Source Observed Concern' textbox is present on page
+    Then i verify 'End Date of Services' textbox is present on page
+    Then i verify 'Provider Name' textbox is present on page
+    Then i verify 'Reason for Admission' textbox is present on page
+    Then i verify 'Services Provided' textbox is present on page
+    Then i verify 'Outcomes' textbox is present on page
+    Then i verify 'Treatment Goals' textbox is present on page
+    And i enter 'randomText' in Source Name textbox
+    And i enter 'randomText' in Source Relationship to Focus Child textbox
+    And i enter 'PastFullDate' in Date Reported textbox
+    And i enter 'PastFullDate' in Date Source Observed Concern textbox
+    And i click Next
+    And i click Complete
+    And i refresh the page
+    Then i navigate to current person using url
+    And i set page to view person
+    ################### Substance Dependency Treatment record ###########################
+    And i click 'Health' subtab
+    And i click 'Behavioral/Emotional/Social Health' relatedlistheaderlink
+    And i refresh the page
+    And i click first Health Information ID from related BehavioralEmotionalSocialHealth table of view Person page
+    And i refresh the page
+    Then i verify 'Start Date of Services' textContains is present on page
+    Then i verify 'Source Relationship to Focus Child' textContains is present on page
+    Then i verify 'Date Reported' textContains is present on page
+    Then i verify 'Source Name' textContains is present on page
+    Then i verify 'Date Source Observed Concern' textContains is present on page
+    Then i verify 'End Date of Services' textContains is present on page
+    Then i verify 'Provider Name' textContains is present on page
+    Then i verify 'Reason for Admission' textContains is present on page
+    Then i verify 'Services Provided' textContains is present on page
+    Then i verify 'Outcomes' textContains is present on page
+    Then i verify 'Treatment Goals' textContains is present on page
+    And i scroll to Down by 350 pixels
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+    And i click on Log Out
+
+    Examples: 
+      | CMUser                    |
+      | 'CMWorkerContraCosta'     |
+      | 'CMSupervisorContraCosta' |
+
+
+  @Test1999_part7
+  Scenario Outline: CARESV1-T1999_P7_Behavioral and Emotional Health Needs- Verify that Case Management: Validate Create/Update for Person Profile as CMM, CMS and CMW
+    When i logged in as <CMUser> for V1 application
+    And verify i am on Home page
+    ###################### Create New Non-Investigative Case #################
+    And i click 'Open New Case' link
+    And i switch to last tab
+    And i create new Non-Investigative Case with case type as Child Welfare Voluntary
+    And i set page to view folio
+    And i capture Folio ref url from view folio page
+    ###################  Create New Person  ############################
+    And i click on 'Persons' Partial link
+    And i add new person as female
+    Then i navigate to current folio using url
+    And i click on 'Persons' Partial link
+    And i set page to view person
+    And i capture record number 1 of Validated Person Name column from related Persons table of Persons page
+    And i click saved record of Validated Person Name column from Persons page
+    And i refresh the page
+    And i set page to view person
+    And i click 'validatedPerson' element
+    And i capture current url of record type validated person
+    #################### Behavioral and Emotional Health Needs checkbox ###########################
+    And i click 'Health' subtab
+    And i click 'New Behavioral/Emotional/Social Health' button
+    And i check 'Behavioral and Emotional Health Needs' checkbox
+    And i click Next
+    Then i verify 'Behavioral and Emotional Health Need' dropdown is present on page
+    Then i verify 'Source Relationship to Focus Child' textbox is present on page
+    Then i verify 'Date Reported to Worker' textbox is present on page
+    Then i verify 'Source Name' textbox is present on page
+    Then i verify 'Date Source Observed Concern' textbox is present on page
+    Then i verify 'Additional Information' textarea is present on page
+    And i select 'Anxiety' value in Behavioral and Emotional Health Need dropdown
+    And i enter 'randomText' in Source Name textbox
+    And i enter 'randomText' in Source Relationship to Focus Child textbox
+    And i enter 'PastFullDate' in Date Reported textbox
+    And i enter 'PastFullDate' in Date Source Observed Concern textbox
+    And i click Next
+    And i click Complete
+    And i refresh the page
+    Then i navigate to current person using url
+    And i set page to view person
+    ################### Behavioral and Emotional Health Needs record ###########################
+    And i click 'Health' subtab
+    And i click 'Behavioral/Emotional/Social Health' relatedlistheaderlink
+    And i refresh the page
+    And i click first Health Information ID from related BehavioralEmotionalSocialHealth table of view Person page
+    And i refresh the page
+    Then i verify 'Behavioral and Emotional Health Need' textContains is present on page
+    Then i verify 'Source Relationship to Focus Child' textContains is present on page
+    Then i verify 'Date Reported to Worker' textContains is present on page
+    Then i verify 'Source Name' textContains is present on page
+    Then i verify 'Date Source Observed Concern' textContains is present on page
+    And i scroll to Down by 250 pixels
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+    And i click on Log Out
+
+    Examples: 
+      | CMUser                    |
+      | 'CMWorkerContraCosta'     |
+      | 'CMSupervisorContraCosta' |
+
+
+  @Test1999_part8
+  Scenario Outline: CARESV1-T1999_P8_Alcohol or Substance Abuse Challenges-Verify that Case Management: Validate Create/Update for Person Profile as CMM, CMS and CMW
+    When i logged in as <CMUser> for V1 application
+    And verify i am on Home page
+    ###################### Create New Non-Investigative Case #################
+    And i click 'Open New Case' link
+    And i switch to last tab
+    And i create new Non-Investigative Case with case type as Child Welfare Voluntary
+    And i set page to view folio
+    And i capture Folio ref url from view folio page
+    ###################  Create New Person  ############################
+    And i click on 'Persons' Partial link
+    And i add new person as female
+    Then i navigate to current folio using url
+    And i click on 'Persons' Partial link
+    And i set page to view person
+    And i capture record number 1 of Validated Person Name column from related Persons table of Persons page
+    And i click saved record of Validated Person Name column from Persons page
+    And i refresh the page
+    And i set page to view person
+    And i click 'validatedPerson' element
+    And i capture current url of record type validated person
+    #################### Alcohol or Substance Abuse Challenges checkbox ###########################
+    And i click 'Health' subtab
+    And i click 'New Behavioral/Emotional/Social Health' button
+    And i check 'Alcohol or Substance Abuse Challenges' checkbox
+    And i click Next
+    Then i verify 'Current Alcohol or Substance Use?' dropdown is present on page
+    Then i verify 'Source Relationship to Focus Child' textbox is present on page
+    Then i verify 'Date Reported' textbox is present on page
+    Then i verify 'Source Name' textbox is present on page
+    Then i verify 'Date Source Observed Concern' textbox is present on page
+    Then i verify 'Additional Information' textarea is present on page
+    And i select 'Yes' value in Current Alcohol or Substance Use? dropdown
+    And i enter 'randomText' in Source Name textbox
+    And i enter 'randomText' in Source Relationship to Focus Child textbox
+    And i enter 'PastFullDate' in Date Reported textbox
+    And i enter 'PastFullDate' in Date Source Observed Concern textbox
+    And i select 'Alcohol' value in Abuse Challenge Type dropdown
+    And i click Next
+    And i click Complete
+    Then i navigate to current person using url
+    And i set page to view person
+    ################### Alcohol or Substance Abuse Challenges record ###########################
+    And i click 'Health' subtab
+    And i click 'Behavioral/Emotional/Social Health' relatedlistheaderlink
+    And i refresh the page
+    And i click first Health Information ID from related BehavioralEmotionalSocialHealth table of view Person page
+    And i refresh the page
+    Then i verify 'Current Alcohol or Substance Use?' textContains is present on page
+    Then i verify 'Source Relationship to Focus Child' textContains is present on page
+    Then i verify 'Date Reported' textContains is present on page
+    Then i verify 'Source Name' textContains is present on page
+    Then i verify 'Date Source Observed Concern' textContains is present on page
+    Then i verify 'Additional Information' textContains is present on page
+    And i scroll to Down by 250 pixels
+    Then i verify 'Created By' text is present on page
+    Then i verify 'Last Modified By' text is present on page
+    And i click on Log Out
+
+    Examples: 
+      | CMUser                    |
+      | 'CMWorkerContraCosta'     |
+      | 'CMSupervisorContraCosta' |
