@@ -53,6 +53,43 @@
 	    logger.info("Provider Organization Record is created");
 		Commons.hardWaitInSecond(2);
 	}
+
+	/**
+	 * @author priyanka.pandey
+	 * This method creates Warrant record - new Warrant Record is created and saved
+	 * 
+	 * @throws Exception
+	 */
+	@And("i create new warrant record")
+	public void i_create_new_warrant_record() throws IOException {
+		appCommonSteps.i_navigate_to_current_using_url("folio");
+        setPageName("view folio");
+		commonSteps.click_element("Show more actions", "button");
+		commonSteps.click_element("New Court Work Item", "button");
+		logger.info("----user entering new Warrant Record----");
+		commonSteps.select_radiobutton_checkbox("Warrant", "radiobutton");
+		commonSteps.click_element("Next", "button");
+	    commonSteps.click_element("Next", "button");
+	    commonSteps.click_element("Next", "button");
+	    commonSteps.click_element("Next", "button");
+	    commonSteps.select_value_in_dropdown_popup_index("Forensic Medical Exam Warrant", "Warrant Type");
+	    appCommonSteps.select_value_from_propertyfile_in_searchbox("cm worker contracosta","Assigned Social Worker","searchbox");
+	    commonSteps.click_element("Next", "button");
+	    commonSteps.wait_for("1");
+	    logger.info("Warrant record is created");
+	    commonSteps.wait_for("2"); 
+	}
+	
+	@And("i create new court case record")
+	public void i_create_new_court_case_record() throws IOException {
+		appCommonSteps.i_navigate_to_current_using_url("folio");
+        setPageName("view folio");
+		commonSteps.click_element("Show more actions", "button");
+		commonSteps.click_element("New Court Case", "button");
+		logger.info("----user entering new Court Case Record----");
+		commonSteps.click_element("Save", "button");
+	}
+	
 	
 
 
